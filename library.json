@@ -19,8 +19,8 @@
             "version": "^1.0.0"
         },
         {
-            "name": "SD",
-            "version": "^1.2.3"
+            "id": "SD",
+            "version": "1a24a9486d"
         },
         {
             "name": "WiFiEsp",
