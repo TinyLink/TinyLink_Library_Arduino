@@ -19,6 +19,9 @@
             "version": "^1.0.0"
         },
         {
+            "id": "161"
+        },
+        {
             "name": "WiFiEsp",
             "version": "^2.2.2"
         }
