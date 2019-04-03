@@ -1,12 +1,12 @@
+#ifndef LORA_SHIELD_ARDUINO_UNO_H
+#define LORA_SHIELD_ARDUINO_UNO_H
+
+#include <Arduino.h>
+#include "TL_Config.h"
+#include "RH_RF95.h"
+
 #ifdef TINYLINK_LORA
 	#if TINYLINK_LORA == LORA_SHIELD
-
-        #ifndef LORA_SHIELD_ARDUINO_UNO_H
-        #define LORA_SHIELD_ARDUINO_UNO_H
-
-        #include <Arduino.h>
-        #include "TL_Config.h"
-        #include "RH_RF95.h"
 
         class LORA_Shield_LORA_Arduino_UNO
         {

@@ -1,7 +1,7 @@
+#include "Grove_Light_Light_Arduino_UNO.h"
+        
 #ifdef TINYLINK_LIGHT
-	#if TINYLINK_LIGHT == GROVE_LIGHT
-
-		#include "Grove_Light_Light_Arduino_UNO.h"
+    #if TINYLINK_LIGHT == GROVE_LIGHT
 
 		Grove_Light_Light_Arduino_UNO::Grove_Light_Light_Arduino_UNO():Sensor(0.0){
 		}

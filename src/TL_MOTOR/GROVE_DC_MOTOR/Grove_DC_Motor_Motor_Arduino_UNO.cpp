@@ -1,7 +1,7 @@
+#include "Grove_DC_Motor_Motor_Arduino_UNO.h"
+
 #ifdef TINYLINK_MOTOR
 	#if TINYLINK_MOTOR == GROVE_DC_MOTOR
-
-		#include "Grove_DC_Motor_Motor_Arduino_UNO.h"
 
 		Grove_DC_Motor_Motor_Arduino_UNO::Grove_DC_Motor_Motor_Arduino_UNO():stateSig(0){
 			pinMode(MOTOR_DIGITAL_OUTPUT, OUTPUT);

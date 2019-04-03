@@ -1,7 +1,7 @@
+#include "LORA_Shield_LORA_Arduino_UNO.h"
+
 #ifdef TINYLINK_LORA
 	#if TINYLINK_LORA == LORA_SHIELD
-
-        #include "LORA_Shield_LORA_Arduino_UNO.h"
 
         RH_RF95 rf95;
 

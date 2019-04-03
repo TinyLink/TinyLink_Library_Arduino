@@ -1,7 +1,7 @@
+#include "Soil_Moisture_Analog_Soil_Humidity_Arduino_UNO.h"
+
 #ifdef TINYLINK_SOIL_HUMIDITY
 	#if TINYLINK_SOIL_HUMIDITY == SOIL_MOISTURE_ANALOG
-
-		#include "Soil_Moisture_Analog_Soil_Humidity_Arduino_UNO.h"
 
 		Soil_Moisture_Analog_Soil_Humidity_Arduino_UNO::Soil_Moisture_Analog_Soil_Humidity_Arduino_UNO():Sensor(0.0){
 		}

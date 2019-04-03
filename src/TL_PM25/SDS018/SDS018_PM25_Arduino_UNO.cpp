@@ -1,7 +1,7 @@
+#include "SDS018_PM25_Arduino_UNO.h"
+
 #ifdef TINYLINK_PM25
 	#if TINYLINK_PM25 == SDS018
-
-		#include "SDS018_PM25_Arduino_UNO.h"
 
 		#if PM25_UART_TX == 0 || PM25_UART_RX == 1
 			#define SDS018_Serial Serial

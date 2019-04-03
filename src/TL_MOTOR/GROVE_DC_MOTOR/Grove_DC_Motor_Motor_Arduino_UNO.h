@@ -1,8 +1,8 @@
+#ifndef GROVE_DC_MOTOR_ARDUINO_UNO_H
+#define GROVE_DC_MOTOR_ARDUINO_UNO_H
+
 #ifdef TINYLINK_MOTOR
 	#if TINYLINK_MOTOR == GROVE_DC_MOTOR
-
-		#ifndef GROVE_DC_MOTOR_ARDUINO_UNO_H
-		#define GROVE_DC_MOTOR_ARDUINO_UNO_H
 
 		#include <Arduino.h>
 		#include "TL_Config.h"

@@ -1,9 +1,9 @@
+#include <Arduino.h>
+#include "TL_Config.h"
+#include "Grove_Relay_Relay_Arduino_UNO.h"
+
 #ifdef TINYLINK_RELAY
 	#if TINYLINK_RELAY == GROVE_RELAY
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
-		#include "Grove_Relay_Relay_Arduino_UNO.h"
 
 		Grove_Relay_Relay_Arduino_UNO::Grove_Relay_Relay_Arduino_UNO():stateSig(0){
 			pinMode(RELAY_DIGITAL_OUTPUT, OUTPUT);

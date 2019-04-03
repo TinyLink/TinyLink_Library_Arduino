@@ -1,14 +1,14 @@
+#ifndef GROVE_DIGITAL_LIGHT_LIGHT_ARDUINO_UNO_H
+#define GROVE_DIGITAL_LIGHT_LIGHT_ARDUINO_UNO_H
+
+#include <Arduino.h>
+#include <Wire.h>
+#include "TL_Config.h"
+#include "Sensor_template.h"
+#include "arduino_digital_light.h"
+
 #ifdef TINYLINK_LIGHT
 	#if TINYLINK_LIGHT == GROVE_DIGITAL_LIGHT
-
-		#ifndef GROVE_DIGITAL_LIGHT_LIGHT_ARDUINO_UNO_H
-		#define GROVE_DIGITAL_LIGHT_LIGHT_ARDUINO_UNO_H
-
-		#include <Arduino.h>
-		#include <Wire.h>
-		#include "TL_Config.h"
-		#include "Sensor_template.h"
-		#include "arduino_digital_light.h"
 
 		class Grove_Digital_Light_Light_Arduino_UNO: public Sensor<double>{
 		private:

@@ -1,7 +1,7 @@
+#include "SD_Shield_Storage_Arduino_UNO.h"
+
 #ifdef TINYLINK_STORAGE
 	#if TINYLINK_STORAGE == SD_SHIELD
-
-		#include "SD_Shield_Storage_Arduino_UNO.h"
 
 		SD_Shield_Storage_Arduino_UNO::SD_Shield_Storage_Arduino_UNO(){
 		#ifdef TINYLINK_FILE

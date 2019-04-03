@@ -1,13 +1,13 @@
+#include "TL_JSON.h"
+
+//TL_JSON::TL_JSON(const char* inbuff): res_json(inbuff){
+//    StaticJsonBuffer<200> jsonBuffer;
+//    //root = jsonBuffer.parseObject(res_json);
+//    JsonObject* tmpJson = &root["ESP_IN_PC_OUT"].as<JsonObject>();
+//}
+
 #ifdef TINYLINK_JSON
 	#if TINYLINK_JSON == ARDUINO_JSON
-
-        #include "TL_JSON.h"
-
-        //TL_JSON::TL_JSON(const char* inbuff): res_json(inbuff){
-        //    StaticJsonBuffer<200> jsonBuffer;
-        //    //root = jsonBuffer.parseObject(res_json);
-        //    JsonObject* tmpJson = &root["ESP_IN_PC_OUT"].as<JsonObject>();
-        //}
 
         void* parse2string(char* _inData, const char* objName, char* outPara){
             char inData[256];

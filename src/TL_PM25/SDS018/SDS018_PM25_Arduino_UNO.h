@@ -1,13 +1,13 @@
+#ifndef SDS018_PM25_ARDUINO_UNO_H
+#define SDS018_PM25_ARDUINO_UNO_H
+
+#include <Arduino.h>
+#include "TL_Config.h"
+#include "Sensor_template.h"
+#include <SoftwareSerial.h>
+
 #ifdef TINYLINK_PM25
 	#if TINYLINK_PM25 == SDS018
-
-		#ifndef SDS018_PM25_ARDUINO_UNO_H
-		#define SDS018_PM25_ARDUINO_UNO_H
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
-		#include "Sensor_template.h"
-		#include <SoftwareSerial.h>
 
 		class SDS018_PM25_Arduino_UNO: public Sensor<double>{
 		private:

@@ -1,11 +1,11 @@
+#ifndef ARDUINO_LED_LED_ARDUINO_UNO_H
+#define ARDUINO_LED_LED_ARDUINO_UNO_H
+
+#include <Arduino.h>
+#include "TL_Config.h"
+
 #ifdef TINYLINK_LED
 	#if TINYLINK_LED == ARDUINO_LED
-
-		#ifndef ARDUINO_LED_LED_ARDUINO_UNO_H
-		#define ARDUINO_LED_LED_ARDUINO_UNO_H
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
 
 		class Arduino_LED_LED_Arduino_UNO{
 		private:

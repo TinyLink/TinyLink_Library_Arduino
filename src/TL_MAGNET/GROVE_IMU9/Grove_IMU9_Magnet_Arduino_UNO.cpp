@@ -1,7 +1,7 @@
+#include "Grove_IMU9_Magnet_Arduino_UNO.h"
+
 #ifdef TINYLINK_MAGNET
 	#if TINYLINK_MAGNET == GROVE_IMU9
-
-		#include "Grove_IMU9_Magnet_Arduino_UNO.h"
 
 		Grove_9DOF_Magnet::Grove_9DOF_Magnet(){
 			state = 0;

@@ -1,14 +1,14 @@
+#ifndef GROVE_IMU9_MAGNET_ARDUINO_UNO_H
+#define GROVE_IMU9_MAGNET_ARDUINO_UNO_H
+
+#include <Arduino.h>
+#include "TL_Config.h"
+#include "Wire.h"
+#include "MPU9250.h"
+#include "I2Cdev.h"
+
 #ifdef TINYLINK_MAGNET
 	#if TINYLINK_MAGNET == GROVE_IMU9
-
-		#ifndef GROVE_IMU9_MAGNET_ARDUINO_UNO_H
-		#define GROVE_IMU9_MAGNET_ARDUINO_UNO_H
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
-		#include "Wire.h"
-		#include "MPU9250.h"
-		#include "I2Cdev.h"
 
 
 		class Grove_9DOF_Magnet{

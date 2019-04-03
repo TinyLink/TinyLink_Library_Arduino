@@ -1,12 +1,12 @@
+#ifndef GROVE_GSR_SKIN_CURRENT_Arduino_UNO_H
+#define GROVE_GSR_SKIN_CURRENT_Arduino_UNO_H
+
+#include <Arduino.h>
+#include "TL_Config.h"
+#include "Sensor_template.h"
+
 #ifdef TINYLINK_SKIN_CURRENT
 	#if TINYLINK_SKIN_CURRENT == GROVE_GSR
-
-		#ifndef GROVE_GSR_SKIN_CURRENT_Arduino_UNO_H
-		#define GROVE_GSR_SKIN_CURRENT_Arduino_UNO_H
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
-		#include "Sensor_template.h"
 
 		class Grove_GSR_Skin_Current_Arduino_UNO:public Sensor<int> {
 		protected:

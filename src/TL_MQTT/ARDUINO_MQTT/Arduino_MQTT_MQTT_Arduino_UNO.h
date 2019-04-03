@@ -1,17 +1,17 @@
+#ifndef ARDUINO_MQTT_MQTT_ARDUINO_UNO_H
+#define ARDUINO_MQTT_MQTT_ARDUINO_UNO_H
+
+#include <Arduino.h>
+#include "TL_Config.h"
+#if TINYLINK_WIFI == ESP8266
+	#include <WiFiEspClient.h>
+#endif
+#include <IPStack.h>
+#include <Countdown.h>
+#include <MQTTClient.h>
+
 #ifdef TINYLINK_MQTT
 	#if TINYLINK_MQTT == ARDUINO_MQTT
-
-		#ifndef ARDUINO_MQTT_MQTT_ARDUINO_UNO_H
-		#define ARDUINO_MQTT_MQTT_ARDUINO_UNO_H
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
-		#if TINYLINK_WIFI == ESP8266
-			#include <WiFiEspClient.h>
-		#endif
-		#include <IPStack.h>
-		#include <Countdown.h>
-		#include <MQTTClient.h>
 
 		class TL_MQTT{
 		private:

@@ -1,7 +1,7 @@
+#include "Grove_Moisture_Soil_Humidity_Arduino_UNO.h"
+
 #ifdef TINYLINK_SOIL_HUMIDITY
 	#if TINYLINK_SOIL_HUMIDITY == GROVE_MOISTURE
-
-		#include "Grove_Moisture_Soil_Humidity_Arduino_UNO.h"
 
 		Grove_Moisture_Soil_Humidity_Arduino_UNO::Grove_Moisture_Soil_Humidity_Arduino_UNO():Sensor(0.0){
 		}

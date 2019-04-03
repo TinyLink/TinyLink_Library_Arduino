@@ -1,7 +1,7 @@
+#include "Arduino_MQTT_MQTT_Arduino_UNO.h"
+
 #ifdef TINYLINK_MQTT
 	#if TINYLINK_MQTT == ARDUINO_MQTT
-
-		#include "Arduino_MQTT_MQTT_Arduino_UNO.h"
 
 		TL_MQTT::TL_MQTT():_serverName(NULL), _clientName(NULL), _userName(NULL), _password(NULL), tcpClient(NULL), ipstack(NULL), client(NULL){
 		#if TINYLINK_WIFI == ESP8266

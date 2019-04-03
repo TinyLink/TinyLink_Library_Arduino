@@ -1,7 +1,7 @@
+#include "Grove_GSR_Skin_Current_Arduino_UNO.h"
+
 #ifdef TINYLINK_SKIN_CURRENT
 	#if TINYLINK_SKIN_CURRENT == GROVE_GSR
-
-		#include "Grove_GSR_Skin_Current_Arduino_UNO.h"
 
 		Grove_GSR_Skin_Current_Arduino_UNO::Grove_GSR_Skin_Current_Arduino_UNO(): Sensor(0) {	
 		}

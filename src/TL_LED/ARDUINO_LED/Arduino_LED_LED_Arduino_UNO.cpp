@@ -1,7 +1,7 @@
+#include "Arduino_LED_LED_Arduino_UNO.h"
+
 #ifdef TINYLINK_LED
 	#if TINYLINK_LED == ARDUINO_LED
-
-		#include "Arduino_LED_LED_Arduino_UNO.h"
 
 		Arduino_LED_LED_Arduino_UNO::Arduino_LED_LED_Arduino_UNO():stateSig(0){
 			pinMode(ledPin, OUTPUT);

@@ -1,17 +1,17 @@
+#ifndef SD_SHIELD_ARDUINO_UNO_H
+#define SD_SHIELD_ARDUINO_UNO_H
+
+#include <Arduino.h>
+#include "TL_Config.h"
+#ifdef TINYLINK_FILE
+	#include "Arduino_File_File_Arduino_UNO.h"
+#endif
+
+#include <SPI.h>
+#include <SD.h>
+
 #ifdef TINYLINK_STORAGE
 	#if TINYLINK_STORAGE == SD_SHIELD
-
-		#ifndef SD_SHIELD_ARDUINO_UNO_H
-		#define SD_SHIELD_ARDUINO_UNO_H
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
-		#ifdef TINYLINK_FILE
-			#include "Arduino_File_File_Arduino_UNO.h"
-		#endif
-
-		#include <SPI.h>
-		#include <SD.h>
 
 		class SD_Shield_Storage_Arduino_UNO{
 		private:
