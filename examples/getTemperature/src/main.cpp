@@ -2,10 +2,12 @@
 #include <Arduino.h>
 #include "WiFiEsp.h"
 #include "MQTTClient.h"
+#include "SoftwareSerial.h"
 #include "TL_Libraries.h"
 
 void setup() {
   // put your setup code here, to run once:
+  TL_Serial.begin(9600);
   TL_Temperature.read();
   TL_Serial.println(TL_Temperature.data());
 }
