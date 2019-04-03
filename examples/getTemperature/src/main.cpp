@@ -2,7 +2,6 @@
 #include <Arduino.h>
 #include "WiFiEsp.h"
 #include "MQTTClient.h"
-#include "SoftwareSerial.h"
 #include "TL_Libraries.h"
 
 void setup() {
