@@ -13,19 +13,33 @@
         "name": "tinylink group",
         "email": "tinylink@emnets.org"
     },
+    "export": {
+        "include": "src",
+        "exclude": [
+            "document",
+            "examples",
+            "*.md"
+        ]
+
+    },
     "dependencies": [
         {
             "name": "Paho",
             "version": "^1.0.0"
         },
         {
-            "id": "161"
+            "name": "SD"
         },
         {
             "name": "WiFiEsp",
             "version": "^2.2.2"
         }
     ],
+    "build": {
+        "flags": [
+            "-I src/TinyLink"
+        ]
+    },
     "frameworks": "arduino",
     "platforms": [
         "atmelavr"
