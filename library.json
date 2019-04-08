@@ -37,7 +37,10 @@
     ],
     "build": {
         "flags": [
-            "-I src/TinyLink"
+            "-I src/TinyLink",
+            "-I src/TL_FILE/ARDUINO_FILE",
+            "-I src/TL_HTTP/ARDUINO_HTTP",
+            "-I src/TL_MQTT/ARDUINO_MQTT"
         ]
     },
     "frameworks": "arduino",
