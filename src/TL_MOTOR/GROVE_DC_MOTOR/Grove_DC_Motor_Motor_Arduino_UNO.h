@@ -1,11 +1,11 @@
 #ifndef GROVE_DC_MOTOR_ARDUINO_UNO_H
 #define GROVE_DC_MOTOR_ARDUINO_UNO_H
 
+#include <Arduino.h>
+#include "TL_Config.h"
+
 #ifdef TINYLINK_MOTOR
 	#if TINYLINK_MOTOR == GROVE_DC_MOTOR
-
-		#include <Arduino.h>
-		#include "TL_Config.h"
 
 		class Grove_DC_Motor_Motor_Arduino_UNO{
 		private:
