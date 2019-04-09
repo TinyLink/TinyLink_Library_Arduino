@@ -21,6 +21,273 @@ This repository contains the tinylink library for Arduino Uno.
 
 Refer to the [TinyLink API Reference page](http://tinylink.emnets.org/view/en/api_page.php) for more details.
 
+## Usage
+
+To use this library, you must define the necessary macros, specify the components and the connection between peripherals and development board.(In a later release, we will automatically generate these macros)
+
+If you use a module in your application, you need to define a Module Macro to specify the components you use, besides, you also need to define a Interface Macro(if not NULL) to specify the connection between peripherals and development board. For more details, please refer to the following table.
+
+For example, I want to use DHT11 Module to get temperature, the source code is as follows.
+``````
+void setup() {
+    TL_Serial.begin(9600);
+}
+
+void loop() {
+    TL_Temperature.read();
+    TL_Serial.print("Temperature data is ");
+    TL_Serial.println(TL_Temperature.data());
+    TL_Time.delayMillis(1000);
+}
+``````
+In the source code, I use "TL_Serial" and "TL_Temperature". In order to compile the source code correctly, I need to modify the "build_flags" in paltformio.ini as follows.
+``````
+build_flags =
+    -D TINYLINK_SERIAL=1002
+    -D TINYLINK_TIME=1002
+    -D TINYLINK_TEMPERATURE=3032
+    -D TEMPERATURE_DIGITAL_OUTPUT=2
+``````
+
+<table> 
+<tr>
+    <th>Module</th>
+    <th>Module Macro</th>
+    <th>Value</th>
+    <th>Interface</th>
+    <th>Interface Macro</th>
+    <th>Description</th>
+</tr>
+<tr> 
+    <td>TL_Serial</td> 
+    <td>TINYLINK_SERIAL</td> 
+    <td>1002</td> 
+    <td>NULL</td>
+    <td>NULL</td>
+    <td>Arduino Serial, don't need other components</td> 
+</tr> 
+<tr> 
+    <td>TL_Time</td> 
+    <td>TINYLINK_TIME</td> 
+    <td>1002</td> 
+    <td>NULL</td>
+    <td>NULL</td>
+    <td>Arduino Time, don't need other components</td> 
+</tr>
+<tr> 
+    <td>TL_Timer</td> 
+    <td>TINYLINK_TIMER</td> 
+    <td>1002</td> 
+    <td>NULL</td>
+    <td>NULL</td>
+    <td>Arduino Timer, don't need other components</td> 
+</tr>
+<tr> 
+    <td>TL_Storage</td> 
+    <td>TINYLINK_STORAGE</td> 
+    <td>2003</td> 
+    <td>SPI</td>
+    <td>NULL</td>
+    <td>SD Sheild</td> 
+</tr>
+<tr> 
+    <td>TL_File</td> 
+    <td>TINYLINK_FILE</td> 
+    <td>1002</td> 
+    <td>NULL</td>
+    <td>NULL</td>
+    <td>Arduino File, don't need other components</td> 
+</tr>
+<tr> 
+    <td>TL_WiFi</td> 
+    <td>TINYLINK_WIFI</td> 
+    <td>3052</td> 
+    <td>UART</td>
+    <td>WIFI_UART_TX <br/> WIFI_UART_RX</td>
+    <td>Grove ESP8266 WiFi</td> 
+</tr>
+<tr> 
+    <td>TL_HTTP</td> 
+    <td>TINYLINK_HTTP</td> 
+    <td>1002</td> 
+    <td>NULL</td>
+    <td>NULL</td>
+    <td>Arduino HTTP, don't need other components</td> 
+</tr>
+<tr> 
+    <td>TL_MQTT</td> 
+    <td>TINYLINK_MQTT</td> 
+    <td>1002</td> 
+    <td>NULL</td>
+    <td>NULL</td>
+    <td>Arduino MQTT, don't need other components</td> 
+</tr>
+<tr> 
+    <td>TL_Bluetooth</td> 
+    <td>TINYLINK_BLUETOOTH</td> 
+    <td>3016</td> 
+    <td>UART</td>
+    <td>BLUETOOTH_UART_TX <br/> BLUETOOTH_UART_RX</td>
+    <td>Grove Dual BLE Module</td> 
+</tr>
+<tr> 
+    <td>TL_LoRa</td> 
+    <td>TINYLINK_LORA</td> 
+    <td>2016</td> 
+    <td>SPI</td>
+    <td>NULL</td>
+    <td>Dragino LoRa Sheild</td>
+</tr>
+<tr> 
+    <td>TL_PM25</td> 
+    <td>TINYLINK_PM25</td> 
+    <td>3035</td> 
+    <td>UART</td>
+    <td>PM25_UART_TX <br/> PM25_UART_RX</td>
+    <td>SDS018</td>
+</tr>
+<tr> 
+    <td rowspan="3">TL_Humidity</td> 
+    <td rowspan="3">TINYLINK_HUMIDITY</td> 
+    <td>3032</td> 
+    <td>Digital</td>
+    <td>HUMIDITY_DIGITAL_OUTPUT</td>
+    <td>DHT11</td>
+</tr>
+<tr> 
+    <td>3031</td> 
+    <td>Digital</td>
+    <td>HUMIDITY_DIGITAL_OUTPUT</td>
+    <td>DHT22</td>
+</tr>
+<tr>
+    <td>3034</td>
+    <td>I2C</td>
+    <td>NULL</td>
+    <td>TH02</td>
+</tr>
+<tr> 
+    <td rowspan="4">TL_Temperature</td> 
+    <td rowspan="4">TINYLINK_TEMPERATURE</td> 
+    <td>3032</td> 
+    <td>Digital</td>
+    <td>TEMPERATURE_DIGITAL_OUTPUT</td>
+    <td>DHT11</td>
+</tr>
+<tr> 
+    <td>3031</td> 
+    <td>Digital</td>
+    <td>TEMPERATURE_DIGITAL_OUTPUT</td>
+    <td>DHT22</td>
+</tr>
+<tr> 
+    <td>3033</td> 
+    <td>Analog</td>
+    <td>TEMPERATURE_ANALOG</td>
+    <td>Grove Temperature Sensor</td>
+</tr>
+<tr>
+    <td>3034</td>
+    <td>I2C</td>
+    <td>NULL</td>
+    <td>TH02</td>
+</tr>
+<tr> 
+    <td rowspan="2">TL_Soil_Humidity</td> 
+    <td rowspan="2">TINYLINK_SOIL_HUMIDITY</td> 
+    <td>3054</td> 
+    <td>Analog</td>
+    <td>SOIL_HUMIDITY_ANALOG</td>
+    <td>Soil Moisture Analog</td>
+</tr>
+<tr> 
+    <td>3056</td> 
+    <td>Analog</td>
+    <td>SOIL_HUMIDITY_ANALOG</td>
+    <td>Grove Moisture</td>
+</tr>
+<tr> 
+    <td rowspan="2">TL_light</td> 
+    <td rowspan="2">TINYLINK_LIGHT</td> 
+    <td>3023</td> 
+    <td>Analog</td>
+    <td>LIGHT_ANALOG</td>
+    <td>Grove Light</td>
+</tr>
+<tr> 
+    <td>3001</td> 
+    <td>I2C</td>
+    <td>NULL</td>
+    <td>GROVE Digital Light</td>
+</tr>
+<tr> 
+    <td>TL_Accelerometer</td> 
+    <td>TINYLINK_ACCELEROMETER</td> 
+    <td>3048</td> 
+    <td>I2C</td>
+    <td>NULL</td>
+    <td>Grove IMU9</td>
+</tr>
+<tr> 
+    <td>TL_Gyro</td> 
+    <td>TINYLINK_GYRO</td> 
+    <td>3048</td> 
+    <td>I2C</td>
+    <td>NULL</td>
+    <td>Grove IMU9</td>
+</tr>
+<tr> 
+    <td>TL_Heart_Rate</td> 
+    <td>TINYLINK_HEART_RATE</td> 
+    <td>3065</td> 
+    <td>I2C</td>
+    <td>NULL</td>
+    <td>Grove Finger Clip Heart Rate</td>
+</tr>
+<tr> 
+    <td>TL_Skin_Current</td> 
+    <td>TINYLINK_SKIN_CURRENT</td> 
+    <td>3066</td> 
+    <td>Analog</td>
+    <td>SKIN_CURRENT_ANALOG</td>
+    <td>Grove GSR</td>
+</tr>
+<tr> 
+    <td>TL_LED</td> 
+    <td>TINYLINK_LED</td> 
+    <td>1002</td> 
+    <td>NULL</td>
+    <td>NULL</td>
+    <td>Arduino LED, don't need other components</td>
+</tr>
+<tr> 
+    <td>TL_Relay</td> 
+    <td>TINYLINK_RELAY</td> 
+    <td>3061</td> 
+    <td>Digital</td>
+    <td>RELAY_DIGITAL_OUTPUT</td>
+    <td>Grove Relay</td>
+</tr>
+<tr> 
+    <td>TL_Motor</td> 
+    <td>TINYLINK_MOTOR</td> 
+    <td>3064</td> 
+    <td>Digital</td>
+    <td>MOTOR_DIGITAL_OUTPUT</td>
+    <td>Grove DC Motor</td>
+</tr>
+<tr> 
+    <td>TL_Display</td> 
+    <td>TINYLINK_MOTOR</td> 
+    <td>3063</td> 
+    <td>I2C</td>
+    <td>NULL</td>
+    <td>Grove RGB LCD</td>
+</tr>
+
+</table>
+
+
 ## Contributing
 
 If you discover a bug or would like to propose a new feature, please open a new [issue](https://github.com/TinyLink/TinyLink_Library_Arduino/issues).
