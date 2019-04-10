@@ -1,6 +1,7 @@
 /**********************************************************
+# Add these additional configuration into platform.ini
 lib_deps = 
-  https://github.com/TinyLink/TinyLink_Library_Arduino.git
+  TinyLink_Library_Arduino
 
 # all three sensors are on the development board, so it's 
 # id is the board id
@@ -14,7 +15,7 @@ build_flags =
 
 void setup() {
   // put your setup code here, to run once:
-  TL_Serial.begin(9600);
+  TL_Serial.begin(115200);
 }
 
 void loop() {

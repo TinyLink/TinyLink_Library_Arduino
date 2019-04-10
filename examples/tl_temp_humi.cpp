@@ -1,6 +1,6 @@
 /**********************************************************
 lib_deps = 
-  https://github.com/TinyLink/TinyLink_Library_Arduino.git
+  TinyLink_Library_Arduino
 
 # TINYLINK_SERIAL and TINYLINK_TIME is on the development board
 # TINYLINK_TEMPERATURE id is 3032, reprents DHT11
@@ -20,7 +20,7 @@ build_flags =
 
 void setup() {
   // put your setup code here, to run once:
-  TL_Serial.begin(9600);
+  TL_Serial.begin(115200);
 }
 
 void loop() {
