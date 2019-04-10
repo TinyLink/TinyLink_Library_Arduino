@@ -35,7 +35,7 @@ unsigned int messageID = 0;   // 消息ID， 自增
 unsigned int deviceID = 0;    // deviceID，默认为0  
  
 void setup() { 
-  TL_Serial.begin(9600); 
+  TL_Serial.begin(115200); 
   TL_WiFi.init();             // 连接WiFi
   bool wifi_conn = TL_WiFi.join("SSID", "PASSWORD"); 
   mqtt = TL_WiFi.fetchMQTT(); // 连接MQTT 
