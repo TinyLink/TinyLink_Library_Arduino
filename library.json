@@ -43,6 +43,11 @@
             "-I src/TL_MQTT/ARDUINO_MQTT"
         ]
     },
+    "examples": [
+        "[Ee]xamples/*.c",
+        "[Ee]xamples/*.cpp",
+        "[Ee]xamples/*.ino"
+    ],
     "frameworks": "arduino",
     "platforms": [
         "atmelavr"
