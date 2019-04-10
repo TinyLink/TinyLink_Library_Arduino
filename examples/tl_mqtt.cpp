@@ -1,6 +1,6 @@
 /**********************************************************
 lib_deps = 
-  https://github.com/TinyLink/TinyLink_Library_Arduino.git
+  TinyLink_Library_Arduino
 
 # TINYLINK_SERIAL & TINYLINK_TIME & TINYLINK_LED & TINYLINK_MQTT 
 # is on the development board
