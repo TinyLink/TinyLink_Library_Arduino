@@ -1,10 +1,10 @@
 {
     "name": "TinyLink_Library_Arduino",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "keywords": "aliyun, tinylink, arduino, iot",
     "description": "A TinyLink library for Arduino",
     "license": "MIT",
-    "homepage": "https://github.com/TinyLink/TinyLink_Library_Arduino",
+    "homepage": "http://tinylink.emnets.org",
     "repository": {
         "type": "git",
         "url": "https://github.com/TinyLink/TinyLink_Library_Arduino.git"
@@ -14,13 +14,11 @@
         "email": "tinylink@emnets.org"
     },
     "export": {
-        "include": "src",
+        "include": "src/TinyLink/TL_Libraries.h",
         "exclude": [
             "document",
-            "examples",
             "*.md"
         ]
-
     },
     "dependencies": [
         {
