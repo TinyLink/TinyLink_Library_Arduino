@@ -10,3 +10,10 @@
     1. change "export->include" value to show .h files that developers need to include;
     2. change "export->exclude" value to show examples;
     3. change "homepage" value to the url of tinylink website;
+
+## v0.1.2(April. 18th, 2019)
+
+* Bug fix on library.json
+    1. delete "export->include" value;
+    2. change "export->exclude" value to show examples;
+    3. add authors;
