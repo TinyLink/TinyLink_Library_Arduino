@@ -1,6 +1,6 @@
 {
     "name": "TinyLink_Library_Arduino",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "keywords": "aliyun, tinylink, arduino, iot",
     "description": "A TinyLink library for Arduino",
     "license": "MIT",
