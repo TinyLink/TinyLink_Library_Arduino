@@ -118,7 +118,8 @@
 * 工程的创建参考上一示例
 
 * 编写代码，利用DHT11温湿度传感器，周期采集室内温度数据并上传至阿里云物联网平台。代码可参考https://github.com/TinyLink/TinyLink_Library_Arduino/blob/master/examples/tl_mqtt.cpp
-注：示例代码中的WiFi信息以及MQTT参数信息需要开发者根据设备三元组（ProductKey、DeviceName、DeviceSecret）自行填写， 其中，MQTT_PASSWORD参数请使用[该网页](http://tool.oschina.net/encrypt?type=2)计算。
+
+    注：示例代码中的WiFi信息以及MQTT参数信息需要开发者根据设备三元组（ProductKey、DeviceName、DeviceSecret）自行填写， 其中，MQTT_PASSWORD参数请使用[该网页](http://tool.oschina.net/encrypt?type=2)计算。
 
     明文： clientId[DEVICE_NAME]deviceName[DEVICE_NAME]productKey[PRODUCT_KEY]timestamp[TIMESTAMP]
 
