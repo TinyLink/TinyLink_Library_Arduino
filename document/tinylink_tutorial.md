@@ -118,14 +118,14 @@
 * 工程的创建参考上一示例
 
 * 编写代码，利用DHT11温湿度传感器，周期采集室内温度数据并上传至阿里云物联网平台。代码可参考https://github.com/TinyLink/TinyLink_Library_Arduino/blob/master/examples/tl_mqtt.cpp
-（注：示例代码中的WiFi信息以及MQTT参数信息需要开发者根据设备三元组（ProductKey、DeviceName、DeviceSecret）自行填写， 其中，MQTT_PASSWORD参数请使用[该网页](http://tool.oschina.net/encrypt?type=2)计算。
+注：示例代码中的WiFi信息以及MQTT参数信息需要开发者根据设备三元组（ProductKey、DeviceName、DeviceSecret）自行填写， 其中，MQTT_PASSWORD参数请使用[该网页](http://tool.oschina.net/encrypt?type=2)计算。
 
     明文： clientId[DEVICE_NAME]deviceName[DEVICE_NAME]productKey[PRODUCT_KEY]timestamp[TIMESTAMP]
 
     加密方式： HmacSHA256
 
     密钥：[DEVICE_SECRET]
-）
+
 
 * 修改配置文件platformio.ini, 添加库文件依赖， 定义设备类型及设备接口。在本示例中，我们依赖的库文件有两个，分别是“TinyLink_Library_Arduino”以及“AliyunMqttArduino”。“TinyLink_Library_Arduino”库文件主要用于采集温度数据，此部分相关代码及配置请参考上一示例。“AliyunMqttArduino”库用于将采集到的数据通过MQTT协议上传至阿里云物联网平台，该库的相关介绍参见https://platformio.org/lib/show/6100/AliyunMqttArduino
 ![](images/example3/platform_config.png)
