@@ -78,3 +78,59 @@
 ## 用例展示
 打开Device View，并点击蓝色的设备串口名打开串口日志Terminal，可以在该Terminal中看到Log输出信息
 ![](images/example2/Serial.png)
+
+
+# Arduino 上报温度数据至阿里云物联网平台
+
+## 简介
+本例基于[阿里云设备开发工作台](https://hacklab.aliyun.com)、[TinyLink代码库](http://tinylink.emnets.org)以及[阿里云物联网平台](https://iot.console.aliyun.com)， 将设备端采集到的温度数据上报至阿里云物联网平台。
+
+## 准备工作
+* 一个阿里云账号， 新用户可以在[阿里云](https://cn.aliyun.com)免费注册。
+* 一台装有浏览器的开发PC，请使用Chrome浏览器。
+* 一块Arduino Uno开发板、USB开发板连接线、Base Sheild扩展板、DHT11温湿度传感器、Grove Esp8266 WiFi模块。
+
+## 本地硬件连接到云端
+同上
+
+## 在阿里云物联网平台创建产品和设备
+* 登录[阿里云物联网平台](https://iot.console.aliyun.com)
+
+* 创建产品。点击左侧“设备管理”->“产品”菜单， 点击“创建产品”
+![](images/example3/create_product.png)
+
+* 设置产品信息。设置产品名称、联网方式等信息
+![](images/example3/product_config.png)
+
+* 添加产品功能。选择我们创建的产品，点击“功能定义”选项， 添加自定义功能。在本示例中，我们为产品添加一个“温度”属性， 标识符为“temp”， 类型为“float”类型
+![](images/example3/product_function.png)
+
+* 添加设备。点击左侧“设备管理”->“设备”菜单， 点击“添加设备”
+![](images/example3/create_device.png)
+
+* 配置设备信息。选择我们刚刚创建的产品，配置设备名称
+![](images/example3/device_config.png)
+
+* 设备创建完成，在设备信息界面可以看到设备的相关信息
+![](images/example3/device_info.png)
+
+## 创建工程和代码
+* 工程的创建参考上一示例
+
+* 编写代码，利用DHT11温湿度传感器，周期采集室内温度数据并上传至阿里云物联网平台。代码可参考https://github.com/TinyLink/TinyLink_Library_Arduino/blob/master/examples/tl_mqtt.cpp
+（注：示例代码中的WiFi信息以及MQTT参数信息需要开发者根据设备三元组（ProductKey、DeviceName、DeviceSecret）自行填写， 其中，MQTT_PASSWORD参数请使用[该网页](http://tool.oschina.net/encrypt?type=2)计算。
+明文： clientId[DEVICE_NAME]deviceName[DEVICE_NAME]productKey[PRODUCT_KEY]timestamp[TIMESTAMP]
+加密方式： HmacSHA256
+密钥：[DEVICE_SECRET]
+）
+
+* 修改配置文件platformio.ini, 添加库文件依赖， 定义设备类型及设备接口。在本示例中，我们依赖的库文件有两个，分别是“TinyLink_Library_Arduino”以及“AliyunMqttArduino”。“TinyLink_Library_Arduino”库文件主要用于采集温度数据，此部分相关代码及配置请参考上一示例。“AliyunMqttArduino”库用于将采集到的数据通过MQTT协议上传至阿里云物联网平台，该库的相关介绍参见https://platformio.org/lib/show/6100/AliyunMqttArduino
+![](images/example3/platform_config.png)
+
+## 编译和烧写
+同上
+
+## 用例展示
+在阿里云物联网平台查看设备运行状态，可以看到设备上传的温度数据。
+![](images/example3/result.png)
+

@@ -1,60 +1,148 @@
 /**********************************************************
 lib_deps = 
   TinyLink_Library_Arduino
+  AliyunMqttArduino
 
-# TINYLINK_SERIAL & TINYLINK_TIME & TINYLINK_LED & TINYLINK_MQTT 
-# is on the development board
-# TINYLINK_WIFI id is 3052, reprents esp8266
-# TINYLINK_light id is 3023, reprents grove light 
-# LIGHT_ANALOG reprents the gpio pin number
-
-build_flags =
+# TINYLINK_SERIAL & TINYLINK_TIME & TINYLINK_HUMIDITY
+build_flags =  
   -D TINYLINK_SERIAL=1002
   -D TINYLINK_TIME=1002
-  -D TINYLINK_LED=1002
-  -D TINYLINK_MQTT=1002
-  -D TINYLINK_WIFI=3052
-  -D WIFI_UART_TX=2
-  -D WIFI_UART_RX=3
-  -D TINYLINK_LIGHT=3023
-  -D LIGHT_ANALOG=A1
+  -D TINYLINK_TEMPERATURE=3032
+  -D TEMPERATURE_DIGITAL_OUTPUT=2
+  -D MQTT_MAX_PACKET_SIZE=256
+  -D MQTT_KEEPALIVE=60
 ************************************************************/
 
+#include <Arduino.h>
+
+#include <SoftwareSerial.h>
+#include <WiFiEspClient.h>
+#include <WiFiEsp.h>
+
+#include <aliyun_mqtt.h>
 #include "TL_Libraries.h"
 
-TL_MQTT mqtt;
-// 设置MQTT参数 
-int port = 1883;
-char serverName[]= "pk.iot-as-mqtt.cn-shanghai.aliyuncs.com"; 
-char clientName[] = "******"; 
-char userName[] = "*****"; 
-char password[] = "*****"; 
-char propertyPostTopic[] = "/sys/pk/device/thing/event/property/post"; 
- 
-unsigned int messageID = 0;   // 消息ID， 自增 
-unsigned int deviceID = 0;    // deviceID，默认为0  
- 
-void setup() { 
-  TL_Serial.begin(115200); 
-  TL_WiFi.init();             // 连接WiFi
-  bool wifi_conn = TL_WiFi.join("SSID", "PASSWORD"); 
-  mqtt = TL_WiFi.fetchMQTT(); // 连接MQTT 
-  int mqtt_conn = mqtt.connect(serverName, port, clientName, userName, password);   
-} 
-void loop() { 
-  int lightValue = TL_Light.read();    // 读取传感器数据 
-  char buf[150]; 
-  String payload = "{\"id\":\""; // 根据物模型，构造数据包
-  payload += messageID; 
-  payload += "\""; 
-  payload += ",\"version\":\"1.0\""; 
-  payload += ",\"params\":{\"lightValue\":"; 
-  payload += lightValue;  
-  payload += "},\"method\":\"thing.event.property.post\"}"; 
-  int payloadlength = payload.length(); 
-  payload.toCharArray( buf, 150 ); 
-  mqtt.publish(propertyPostTopic, buf, payloadlength); // 数据包发送到指定Topic 
-  messageID++; 
-  TL_Serial.println(buf); 
-  mqtt.yield(4000); 
-} 
+
+#define WIFI_SSID "<YOUR WIFI SSID>"
+#define WIFI_PASSWORD "<YOUR WIFI PASSWORD>"
+
+// Initialize the Ethernet client object
+const int WIFI_RX = 3;
+const int WIFI_TX = 4;
+SoftwareSerial softSerial(WIFI_RX, WIFI_TX); // RX, TX
+
+void connectWiFi()
+{
+    int status = WiFi.status();
+    // attempt to connect to WiFi network
+    while (status != WL_CONNECTED)
+    {
+        TL_Serial.print(F("Attempting to connect to Wifi: "));
+        TL_Serial.println(WIFI_SSID);
+        // Connect to WPA/WPA2 network
+        status = WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+        delay(500);
+    }
+}
+
+void initWiFi()
+{
+    // initialize serial for ESP module
+    softSerial.begin(9600);
+    // initialize ESP module
+    WiFi.init(&softSerial);
+    // check for the presence of the shield
+    if (WiFi.status() == WL_NO_SHIELD)
+    {
+        TL_Serial.println(F("WiFi shield not present, stop"));
+        // don't continue
+        while (true);
+    }
+
+    connectWiFi();
+    TL_Serial.print(F("Connected to AP: "));
+    TL_Serial.println(WiFi.localIP());
+}
+
+#define TIMESTAMP "23668" // can be changed to a random positive value string
+
+// Use external HMAC256 calculation for MQTT_PASSWORD: http://tool.oschina.net/encrypt?type=2
+// Content: clientId[DEVICE_NAME]deviceName[DEVICE_NAME]productKey[PRODUCT_KEY]timestamp[TIMESTAMP]
+// Key: [DEVICE_SECRET]
+
+#define PRODUCT_KEY "<YOUR PRODUCT KEY>"
+#define DEVICE_NAME "<YOUR DEVICE NAME>"
+#define DEVICE_SECRET "<YOUR DEVICE SECRET>"
+#define MQTT_PASSWORD "<YOUR EXTERNAL CALCULAED PASSWORD>"
+
+// https://help.aliyun.com/document_detail/89301.html
+#define ALINK_TOPIC_PROP_POST "/sys/" PRODUCT_KEY "/" DEVICE_NAME "/thing/event/property/post"
+
+unsigned long lastSend;
+
+WiFiEspClient espClient;
+PubSubClient mqttClient(espClient);
+
+void checkMqttConnection()
+{
+    // Loop until we're reconnected
+    while (!mqttClient.connected())
+    {
+        TL_Serial.println(F("Connecting to Aliyun IoT ..."));
+        // Attempt to connect (clientId, username, password)
+        if (connectAliyunMQTTWithPassword(mqttClient, MQTT_PASSWORD))
+        {
+            TL_Serial.println("[MQTT Connected]");
+        }
+        else
+        {
+            TL_Serial.print(F("[MQTT Connect FAILED] [rc = "));
+            TL_Serial.print(mqttClient.state());
+            TL_Serial.println(F(": retrying in 5 seconds]"));
+            // Wait 5 seconds before retrying
+            delay(5000);
+        }
+    }
+}
+
+void getAndSendTemperatureData()
+{
+    // Reading temperature or humidity takes about 250 milliseconds!
+    TL_Temperature.read();
+
+    // Prepare a JSON payload string
+    String payload = "{";
+    payload += "\"temp\":";
+    payload += TL_Temperature.data();
+    payload += "}";
+
+    // Send payload as Alink data
+    String jsonData = F("{\"id\":\"123\",\"version\":\"1.0\",\"method\":\"thing.event.property.post\",\"params\":");
+    jsonData += payload;
+    jsonData += F("}");
+
+    char alinkData[128];
+    jsonData.toCharArray(alinkData, 128);
+    mqttClient.publish(ALINK_TOPIC_PROP_POST, alinkData);
+    TL_Serial.println(alinkData);
+}
+
+void setup()
+{
+    TL_Serial.begin(115200);
+    initWiFi();
+    mqttPrepare(TIMESTAMP, PRODUCT_KEY, DEVICE_NAME, DEVICE_SECRET);
+    lastSend = 0;
+}
+
+void loop()
+{
+    checkMqttConnection();
+
+    if (TL_Time.millisFromStart() - lastSend >= 10000)
+    { // Update and send only after 1 seconds
+        getAndSendTemperatureData();
+        lastSend = TL_Time.millisFromStart();
+    }
+    mqttClient.loop();
+}
